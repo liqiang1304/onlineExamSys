@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <display-name></display-name>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>GenerateNewsHTML</servlet-name>
+    <servlet-class>GenerateNewsHTML</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>DeleteUser</servlet-name>
+    <servlet-class>DeleteUser</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ChangeType</servlet-name>
+    <servlet-class>ChangeType</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>addTest</servlet-name>
+    <servlet-class>addTest</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>addQuestion</servlet-name>
+    <servlet-class>addQuestion</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>deleteTopic</servlet-name>
+    <servlet-class>deleteTopic</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>deleteTest</servlet-name>
+    <servlet-class>deleteTest</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>modifyTopic</servlet-name>
+    <servlet-class>modifyTopic</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Exam</servlet-name>
+    <servlet-class>Exam</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>getSocre</servlet-name>
+    <servlet-class>getSocre</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>DeleteNews</servlet-name>
+    <servlet-class>DeleteNews</servlet-class>
+  </servlet>
+
+
+
+
+
+
+
+
+
+
+
+  <servlet-mapping>
+    <servlet-name>GenerateNewsHTML</servlet-name>
+    <url-pattern>/servlet/GenerateNewsHTML</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DeleteUser</servlet-name>
+    <url-pattern>/servlet/DeleteUser</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ChangeType</servlet-name>
+    <url-pattern>/servlet/ChangeType</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>addTest</servlet-name>
+    <url-pattern>/servlet/addTest</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>addQuestion</servlet-name>
+    <url-pattern>/servlet/addQuestion</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>deleteTopic</servlet-name>
+    <url-pattern>/servlet/deleteTopic</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>deleteTest</servlet-name>
+    <url-pattern>/servlet/deleteTest</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>modifyTopic</servlet-name>
+    <url-pattern>/servlet/modifyTopic</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Exam</servlet-name>
+    <url-pattern>/servlet/Exam</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>getSocre</servlet-name>
+    <url-pattern>/servlet/getSocre</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DeleteNews</servlet-name>
+    <url-pattern>/servlet/DeleteNews</url-pattern>
+  </servlet-mapping>	
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/error404.html</location>
+</error-page>
+</web-app>
