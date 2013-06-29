@@ -172,7 +172,8 @@ public class getSocre extends HttpServlet {
 				avg=(avg/passNum)*(passNum-1)+totalCorrect/passNum;
 			}
 			
-			//sql = "update test_title set people_num="
+			sql = "update test_title set people_num="+passNum+", ave="+avg+" where Id='"+request.getParameter("testId")+"'";
+			stmt.executeUpdate(sql);
 			
 		}catch (Exception e) {
 			// TODO: handle exception

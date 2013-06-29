@@ -94,7 +94,7 @@ public class Exam extends HttpServlet {
 					if(rs.next()){
 						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 						String ly_time = sdf.format(new java.util.Date());
-						if((rs.getString("start_time").compareTo(ly_time)<=0)&&(rs.getString("end_time").compareTo(ly_time)>=0)){
+						if((rs.getString("start_time").compareTo(ly_time)<=0)&&(rs.getString("end_time").compareTo(ly_time)>=0)&&(rs.getString("avaliable").equals("yes"))){
 							out.print("");
 						}else{
 							out.println("<meta http-equiv=\"Refresh\" content=\"0; url=../OutofTime.jsp\" />");

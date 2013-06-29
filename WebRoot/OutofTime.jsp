@@ -131,10 +131,14 @@ request.setCharacterEncoding("utf-8");
 			<div class="clear"></div>
 			<div class="login">
 				<div class="left_title">
-					<div align="center">当前不在考试时间范围内</div>
+					<div align="center">考试暂不开放</div>
 				</div>
 				<div align="center">
+					<p>请检查可能的原因：</p>
+					<br/>
 					<p>您当前不在考试的时间范围之内，请确认考试时间！</p>
+                    <br/>
+                    <p>或是考试被管理员关闭，请联系管理员。</p>
                     <br/>
                    <p style="color:red;">将带您跳转回前一个页面</p>
                    <Br/>

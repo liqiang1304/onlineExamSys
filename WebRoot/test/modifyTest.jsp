@@ -51,6 +51,7 @@
 	String testStart=rs.getString("start_time");
 	String testEnd=rs.getString("end_time");
 	String testLen=rs.getString("length");
+	String testAvaliable=rs.getString("avaliable");
   %>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script src="../js/datetimepicker_css.js"></script>
@@ -179,7 +180,7 @@
 					<div align="center">修改测试 [<%=testTitle %>]</div>
 				</div>
                 <div align="center">
-                <form name="addTestFrm" action="../servlet/addTest" method="post">
+                <form name="addTestFrm" action="../servlet/ModifyTest" method="post">
                 <%
                 	if(request.getSession().getAttribute("id").equals(rs.getString("id"))||request.getSession().getAttribute("userType").equals("admin")){
                  %>
@@ -207,10 +208,31 @@
                 <tr>
                 <td  align="left">考试长度：</td>
                 <td  align="left"><input value="<%=testLen %>" type="text" name="testLen" id="testLen"/>分钟</td>
+                </tr>
+                <tr>
+                <td align="left">可用性：</td>
+                <td align="left"><select name="avaliable" id="avaliable" style="width:70px">
+                	<%
+                	if(testAvaliable.equals("yes")){
+                	 %>
+                	<option value="yes" selected="selected">可用</option>
+                	<option value="no">不可用</option>
+                	<%
+                	}
+                	else{
+                	 %>
+                	 <option value="yes">可用</option>
+                	 <option value="no" selected="selected">不可用</option>
+                	 <%
+                	 }
+                	  %>
+                </select></td>
                 </tr>     
                 <tr>
-                <td align="center" colspan="2"><input type="submit" value="提交"/></td>
+                <td align="center" colspan="2"><input type="submit" value="提交"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="返回" onclick="javascript:history.go(-1)"/></td>
+                <input type="hidden" name="testId" id="testId" value="<%=itest_id %>"/>
                 </tr>
+                
                 </table>
                 <%
                 }else{
