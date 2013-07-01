@@ -54,13 +54,9 @@ public class Exam extends HttpServlet {
 			templateContentString += "\n";
 			templateContentString += lineString;
 		}
-		templateContentString = templateContentString.replaceAll(
-				"###title###", "测试进行中");
-		out.println(templateContentString);
 		
 		
-		
-		
+		String jsCodeString="";
 		String testId = request.getParameter("id");
 		//out.println("test id is: " + testId);
 		
@@ -96,6 +92,18 @@ public class Exam extends HttpServlet {
 						String ly_time = sdf.format(new java.util.Date());
 						if((rs.getString("start_time").compareTo(ly_time)<=0)&&(rs.getString("end_time").compareTo(ly_time)>=0)&&(rs.getString("avaliable").equals("yes"))){
 							out.print("");
+							jsCodeString="<script>\n" +
+									"var myDate = new Date();\n" +
+									"var d = Date.UTC(myDate.getFullYear(), myDate.getMonth()+1, myDate.getDate(), myDate.getHours(), myDate.getMinutes()+" + rs.getString("length") + ", myDate.getSeconds());"+
+									//"var d = myDate.getTime()+ " + 1000*60*Integer.valueOf(rs.getString("length")) + ";\n" +
+									"var obj = {\n sec: document.getElementById(\"sec\"),\n mini: document.getElementById(\"mini\"),\n hour: document.getElementById(\"hour\")\n }\n" +
+									"fnTimeCountDown(d, obj);\n" +
+									"setTimeout(sendTest,"+ 1000*60*Integer.valueOf(rs.getString("length")) +");\n" +
+									"function sendTest(){\n" +
+									"	alert(\"考试结束，将会提交试卷！\");\n" +
+									"	document.getElementById(\"testfrm\").submit();\n" +
+									"}\n" +
+									"</script>\n";
 						}else{
 							out.println("<meta http-equiv=\"Refresh\" content=\"0; url=../OutofTime.jsp\" />");
 						}
@@ -104,6 +112,11 @@ public class Exam extends HttpServlet {
 				}
 		}
 		
+		templateContentString = templateContentString.replaceAll(
+				"###title###", "测试进行中");
+		//templateContentString = templateContentString.replaceAll(
+		//		"###jscode###", jsCodeString);
+		out.println(templateContentString);
 		
 		
 		
@@ -125,7 +138,7 @@ public class Exam extends HttpServlet {
 		ResultSet ResQues = stmt.executeQuery(selectQuesSql);
 		
 		int num=0;
-		out.println("<form action=\"getSocre\" method=\"post\">");
+		out.println("<form id=\"testfrm\" name=\"testfrm\" action=\"getSocre\" method=\"post\">");
 		out.println("<table border=\"0\">");
 		
 		while(ResQues.next()){
@@ -183,6 +196,8 @@ public class Exam extends HttpServlet {
 			templateContentString += "\n";
 			templateContentString += lineString;
 		}
+		templateContentString = templateContentString.replaceAll(
+						"###jscode###", jsCodeString);
 		out.println(templateContentString);
 		
 		

@@ -1,11 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script src="../js/datetimepicker_css.js"></script>
-
 <title>CSS+DIV软件宣传模板 | 软件介绍 by 865171.cn</title>
 <link href="../css/css.css" rel="stylesheet" type="text/css" />
+<script src="../info/timeCountDown.js"></script>
 </head>
 <body>
 	<div class="zhong">
@@ -122,6 +121,7 @@
 				<div class="left_title">
 					<div align="center">###title###</div>
 				</div>
+               <div align="right" style="color:red;"> 离考试结束还有： <span id="hour">0 </span>时 <span id="mini">0 </span>分 <span id="sec">0 </span>秒</div>
                 <div align="center">
                 
                 

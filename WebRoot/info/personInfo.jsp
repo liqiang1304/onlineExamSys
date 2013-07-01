@@ -17,6 +17,25 @@ request.setCharacterEncoding("utf-8");
  %>
  	<meta http-equiv="Refresh" content="0; url=../LoginDirect.jsp" />
  <%} %>
+ <%
+ String driverName = "com.mysql.jdbc.Driver";
+		String userName = "root";
+		String userPasswd = "";
+		String dbName = "student";
+		String tableName = "news";
+		String url = "jdbc:mysql://localhost:3306/" + dbName + "?user="
+				+ userName + "&password=" + userPasswd
+				+ "&useUnicode=true&characterEncoding=utf8";
+		Class.forName("com.mysql.jdbc.Driver").newInstance();
+		Connection conn = DriverManager.getConnection(url);
+		Statement stmt = conn.createStatement();
+		Statement stmt1 = conn.createStatement();
+		String sql="select * from personinfo where id='" + session.getAttribute("id") + "'";
+		ResultSet rs = stmt.executeQuery(sql);
+		if(null!=rs)
+			rs.next();
+			
+  %>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>CSS+DIV软件宣传模板 | 软件介绍 by 865171.cn</title>
 <link href="../css/css.css" rel="stylesheet" type="text/css" />
@@ -147,22 +166,92 @@ request.setCharacterEncoding("utf-8");
                     	if(session.getAttribute("userType")!=null){
                      %>
 					  <p style="color:red;">欢迎您：<%=session.getAttribute("name")%></p>
+					  <br/>
+					  <hr color=#204080/>
+					  <p style="color:black;"><b>个人信息：</b></p>
+					  <br/>
+					  <table>
+					  <tr>
+					  <td>用户ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br /></td>
+					  <td><%=rs.getString("id") %></td>
+					  </tr>
+					  <tr>
+					  <td>姓名</td>
+					  <td><%=rs.getString("name") %></td>
+					  </tr>
+					  <tr>
+					  <td>权限</td>
+					  <td><%=rs.getString("authority") %></td>
+					  </tr>
+					  <tr>
+					  <td>E-mail</td>
+					  <td><%=rs.getString("email") %></td>
+					  </tr>
+					  <tr>
+					  <td>通过测试数量</td>
+					  <td><%=rs.getString("passTest") %></td>
+					  </tr>
+					  <tr>
+					  <td>总分</td>
+					  <td><%=rs.getString("socre") %></td>
+					  </tr>
+					  </table>
+					  <br/>
+					  <hr color=#204080/>
+					  <p style="color:black;"><b>考试信息：</b>（快速预览 最近5项考试）</p>
+					  <br/>
+					  <table>
+					  	<tr>
+					  		<td align="center"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;考试号&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+					  		<td align="center"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;考试名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+					  		<td align="center"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+					  		<td align="center"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;考试时间&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+					  	</tr>
+					  	<%
+					  		sql = "select * from student_recoder where student_id='" + session.getAttribute("id") + "'";
+					  		rs = stmt.executeQuery(sql);
+					  	 	while(rs.next()){
+					  		 	out.print("<tr>");
+					  		 	out.print("<td align=\"center\">"+rs.getString("test_id")+"</td>");
+					  		 	String sql1="select * from test_title where Id='"+rs.getString("test_id")+"'";
+					  		 	ResultSet rs1 = stmt1.executeQuery(sql1);
+					  		 	if(rs1.next()){
+					  		 		out.print("<td align=\"center\">"+rs1.getString("test_name")+"</td>");
+					  		 	}else{
+					  		 		out.print("<td align=\"center\">null</td>");
+					  		 	}
+					  		 	out.print("<td align=\"center\">"+rs.getString("total_correct")+"/"+rs.getString("total_question")+"</td>");
+					  		 	out.print("<td align=\"center\">"+rs.getString("test_time")+"</td>");
+					  		 	out.print("</tr>");
+					  	 	}
+					  	 
+					  	 
+					  	 %>
+					  </table>
+					  <br/>
+					  <hr color=#204080/>
+					  <p style="color:black;"><b>管理平台：</b></p>
+					  <br/>
 					 <%
 					 }
 					 	if(session.getAttribute("userType")!=null&&(session.getAttribute("userType").equals("teacher")||session.getAttribute("userType").equals("admin"))){
 					  %>
-					  <a href="submitNews.jsp">发表文章</a>
-					  <a href="TestManage.jsp">考试管理</a>
-					  <a href="NewsManage.jsp">新闻管理</a>
+					  <a href="submitNews.jsp" style="color:blue;">发表文章</a>
+					  <a href="TestManage.jsp" style="color:blue;">考试管理</a>
+					  <a href="NewsManage.jsp" style="color:blue;">新闻管理</a>
 					  <%
 					  }
 					  if(session.getAttribute("userType")!=null&&session.getAttribute("userType").equals("admin")){
 					   %>
-					  <a href="UserManage.jsp">用户管理</a>
+					  <a href="UserManage.jsp" style="color:blue;">用户管理</a>
 					  
 					  <%
 					  }
 					   %>
+					  <a href=".jsp" style="color:blue;">资料修改</a>
+					  <a href=".jsp" style="color:blue;">考试信息</a>
+					  <br/>
+					<hr color=#204080/>
 					</form>
 				</div>
 			</div>
