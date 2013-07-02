@@ -49,26 +49,26 @@ document.frm.submit();
       <h2><a href="index.jsp">首页</a></h2>
     </div>
     <div id="menu1" class="menusel">
-      <h2><a href="xiangqing.html">关于该系统</a></h2>
+      <h2><a href="about/about.jsp">关于该系统</a></h2>
       <div class="position">
         <ul class="clearfix typeul">
-          <li><a href="http://www.865171.cn">系统简介</a></li>
-          <li class="lli"><a href="http://www.865171.cn">联系方式</a></li>
+          <li><a href="about/about.jsp">系统简介</a></li>
+          <li class="lli"><a href="about/contact.jsp">联系方式</a></li>
         </ul>
       </div>
     </div>
     
 	<div id="menu2" class="menusel">
-      <h2><a href="xiangqing.html">个人信息</a></h2>
+      <h2><a href="info/personInfo.jsp">个人信息</a></h2>
         <div class="position">
         <ul class="clearfix typeul">
-        <li class="lli"><a href="http://www.865171.cn">查看个人信息</a></li>
+        <li class="lli"><a href="info/personInfo.jsp">查看个人信息</a></li>
         </ul>
       </div>
     </div>
     
     <div id="menu3" class="menusel">
-      <h2><a href="xinwen.html">通知信息</a></h2>
+      <h2><a href="news/campusNews.jsp">通知信息</a></h2>
       <div class="position">
         <ul class="clearfix typeul">
           <li><a href="news/campusNews.jsp">学校新闻</a></li>
@@ -79,14 +79,14 @@ document.frm.submit();
     </div>
     
     <div id="menu4" class="menusel">
-      <h2><a href="http://www.865171.cn">在线考试</a></h2>
+      <h2><a href="test/allTest.jsp">在线考试</a></h2>
       <div class="position">
         <ul class="clearfix typeul">
-        <li class="lli"><a href="http://www.865171.cn">考试类型</a></li>
+        <li class="lli"><a href="test/allTest.jsp">考试类型</a></li>
         </ul>
       </div>
     </div>
-    <div id="menu5" class="menusel">
+<!--     <div id="menu5" class="menusel">
       <h2><a href="http://www.865171.cn">在线留言</a></h2>
       <div class="position">
         <ul class="clearfix typeul">
@@ -101,7 +101,7 @@ document.frm.submit();
         <ul class="clearfix typeul">
         </ul>
       </div>
-    </div>
+    </div> -->
   </div>
   <div class="main">
     <div class="left">
@@ -173,7 +173,7 @@ document.frm.submit();
         <div class="left_title">考试分类</div>
         <div class="left_nr">
           <ul>
-            <li><a href="http://www.myneko.tk/404-Error-Template/404nofound.html">N/A</a></li>
+            <li><a href="test/allTest.jsp">查看考试</a></li>
           </ul>
         </div>
       </div>
@@ -181,7 +181,7 @@ document.frm.submit();
     <div class="right">
       <img src="images/img_8.gif" style="float:left"/>
        <div class="news">
-        <div class="news_title"><span><img src="images/title_1.gif" /></span><a href="http://www.865171.cn"><img src="images/more.gif" /></a></div>
+        <div class="news_title"><span><img src="images/title_1.gif" /></span><a href="news/campusNews.jsp"><img src="images/more.gif" /></a></div>
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <%
         	String titleString="";
@@ -297,7 +297,7 @@ document.frm.submit();
    			  }
        %>
       <div class="news">
-        <div class="news_title"><span><img src="images/title_1.gif" /></span><a href="http://www.865171.cn"><img src="images/more.gif" /></a></div>
+        <div class="news_title"><span><img src="images/title_1.gif" /></span><a href="test/allTest.jsp"><img src="images/more.gif" /></a></div>
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
             <td width="48%" height="18"><b>测试名称</b></td>
@@ -335,7 +335,7 @@ document.frm.submit();
     </div>
     <div class="clear"></div>
     <div class="huoban">
-      <div class="huoban_title"><img src="images/title_2.gif" /></div>
+      <div class="huoban_title"><br /></div>
       <div class="huoban_nr">
         <ul>
           <li><img src="images/huoban_logo.gif" /></li>

@@ -122,17 +122,17 @@ public class GenerateNewsHTML extends HttpServlet {
 					"###time###", ly_time);
 			templateContentString = templateContentString.replaceAll(
 					"###type###", type);
-			//System.out.print(templateContentString);
+			// System.out.print(templateContentString);
 			Calendar calendar = Calendar.getInstance();
 			String filenameString = String.valueOf(calendar.getTimeInMillis())
 					+ ".jsp";
-			String fileUrl=filenameString;
+			String fileUrl = filenameString;
 			String fileUrlString = "../news/" + filenameString;
 			filenameString = getServletContext().getRealPath("news/") + "/"
 					+ filenameString;
 			FileOutputStream fileOutputStream = new FileOutputStream(
 					filenameString);
-			//System.out.print(filenameString);
+			// System.out.print(filenameString);
 			byte tag_bytes[] = templateContentString.getBytes("UTF-8");
 			fileOutputStream.write(tag_bytes);
 			fileOutputStream.close();
@@ -143,21 +143,22 @@ public class GenerateNewsHTML extends HttpServlet {
 			String dbName = "student";
 			String tableName = "news";
 			String url = "jdbc:mysql://localhost:3306/" + dbName + "?user="
-					+ userName + "&password=" + userPasswd + "&useUnicode=true&characterEncoding=utf8";
+					+ userName + "&password=" + userPasswd
+					+ "&useUnicode=true&characterEncoding=utf8";
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			Connection conn = DriverManager.getConnection(url);
 			Statement stmt = conn.createStatement();
-			String sql = "insert into news values('" + title + "','"
-					+ ly_time + "','" + type + "','" + fileUrl + "','"
-					+ editor + "','" + request.getSession().getAttribute("id") + "')";
+			String sql = "insert into news values('" + title + "','" + ly_time
+					+ "','" + type + "','" + fileUrl + "','" + editor + "','"
+					+ request.getSession().getAttribute("id") + "')";
 			System.err.println(sql);
 			stmt.executeUpdate(sql);
-			
+
 			response.sendRedirect(fileUrlString);
 		} catch (Exception e) {
 			System.out.print(e.toString());
 		}
-		
+
 		response.setContentType("text/html");
 		out.flush();
 		out.close();

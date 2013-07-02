@@ -11,74 +11,83 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.io.*;
 
-
 public class DeleteNews extends HttpServlet {
 
 	/**
 	 * The doGet method of the servlet. <br>
-	 *
+	 * 
 	 * This method is called when a form has its tag value method equals to get.
 	 * 
-	 * @param request the request send by the client to the server
-	 * @param response the response send by the server to the client
-	 * @throws ServletException if an error occurred
-	 * @throws IOException if an error occurred
+	 * @param request
+	 *            the request send by the client to the server
+	 * @param response
+	 *            the response send by the server to the client
+	 * @throws ServletException
+	 *             if an error occurred
+	 * @throws IOException
+	 *             if an error occurred
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
-		
+
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 
-		String id=request.getParameter("id");
-		
-		try{
+		String id = request.getParameter("id");
+
+		try {
 			String driverName = "com.mysql.jdbc.Driver";
 			String userName = "root";
 			String userPasswd = "";
 			String dbName = "student";
 			String tableName = "question";
 			String url = "jdbc:mysql://localhost:3306/" + dbName + "?user="
-					+ userName + "&password=" + userPasswd + "&useUnicode=true&characterEncoding=utf8";
+					+ userName + "&password=" + userPasswd
+					+ "&useUnicode=true&characterEncoding=utf8";
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			Connection conn = DriverManager.getConnection(url);
 			Statement stmt = conn.createStatement();
-			String sql = "delete from news where url='"+id+"'";
+			String sql = "delete from news where url='" + id + "'";
 			System.out.println(sql);
 			stmt.executeUpdate(sql);
-			
-			String pathString=getServletContext().getRealPath("news/") + "/" + id;
+
+			String pathString = getServletContext().getRealPath("news/") + "/"
+					+ id;
 			File file = new File(pathString);
-			if(file.exists()){
+			if (file.exists()) {
 				file.delete();
-			}else{
-				System.err.println("file "+ pathString +" doesn't exist!\n");
+			} else {
+				System.err.println("file " + pathString + " doesn't exist!\n");
 			}
-			
-			
-		}catch (Exception e) {
+
+		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e);
 		}
-		
+
 		response.sendRedirect("../info/NewsManage.jsp");
-		
+
 		out.flush();
 		out.close();
 	}
 
 	/**
 	 * The doPost method of the servlet. <br>
-	 *
-	 * This method is called when a form has its tag value method equals to post.
 	 * 
-	 * @param request the request send by the client to the server
-	 * @param response the response send by the server to the client
-	 * @throws ServletException if an error occurred
-	 * @throws IOException if an error occurred
+	 * This method is called when a form has its tag value method equals to
+	 * post.
+	 * 
+	 * @param request
+	 *            the request send by the client to the server
+	 * @param response
+	 *            the response send by the server to the client
+	 * @throws ServletException
+	 *             if an error occurred
+	 * @throws IOException
+	 *             if an error occurred
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

@@ -47,95 +47,64 @@
 			<img src="../images/img_2.gif" />
 		</div>
 		<div class="menu">
-			<div class="menusel" style="width:95px;">
-				<h2>
-					<a href="../index.jsp">首页</a>
-				</h2>
-			</div>
-			<div id="menu1" class="menusel">
-				<h2>
-					<a href="xiangqing.html">关于该系统</a>
-				</h2>
-				<div class="position">
-					<ul class="clearfix typeul">
-						<li><a
-							href="http://www.myneko.tk/404-Error-Template/404nofound.html">系统简介</a>
-						</li>
-						<li class="lli"><a
-							href="http://www.myneko.tk/404-Error-Template/404nofound.html">联系方式</a>
-						</li>
-					</ul>
-				</div>
-			</div>
+    <div class="menusel" style="width:95px;">
+      <h2><a href="../index.jsp">首页</a></h2>
+    </div>
+    <div id="menu1" class="menusel">
+      <h2><a href="../about/about.jsp">关于该系统</a></h2>
+      <div class="position">
+        <ul class="clearfix typeul">
+          <li><a href="../about/about.jsp">系统简介</a></li>
+          <li class="lli"><a href="../about/contact.jsp">联系方式</a></li>
+        </ul>
+      </div>
+    </div>
+    
+	<div id="menu2" class="menusel">
+      <h2><a href="../info/personInfo.jsp">个人信息</a></h2>
+        <div class="position">
+        <ul class="clearfix typeul">
+        <li class="lli"><a href="../info/personInfo.jsp">查看个人信息</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div id="menu3" class="menusel">
+      <h2><a href="../news/campusNews.jsp">通知信息</a></h2>
+      <div class="position">
+        <ul class="clearfix typeul">
+          <li><a href="../news/campusNews.jsp">学校新闻</a></li>
+          <li><a href="../news/schoolNews.jsp">学院新闻</a></li>
+          <li class="lli"><a href="../news/studyFiles.jsp">学习资料</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div id="menu4" class="menusel">
+      <h2><a href="../test/allTest.jsp">在线考试</a></h2>
+      <div class="position">
+        <ul class="clearfix typeul">
+        <li class="lli"><a href="../test/allTest.jsp">考试类型</a></li>
+        </ul>
+      </div>
+    </div>
+<!--     <div id="menu5" class="menusel">
+      <h2><a href="http://www.865171.cn">在线留言</a></h2>
+      <div class="position">
+        <ul class="clearfix typeul">
+          <li><a href="http://www.865171.cn">发表留言</a></li>
 
-			<div id="menu2" class="menusel">
-				<h2>
-					<a href="xiangqing.html">个人信息</a>
-				</h2>
-				<div class="position">
-					<ul class="clearfix typeul">
-						<li class="lli"><a
-							href="http://www.myneko.tk/404-Error-Template/404nofound.html">查看个人信息</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-
-			<div id="menu3" class="menusel">
-				<h2>
-					<a href="xinwen.html">通知信息</a>
-				</h2>
-				<div class="position">
-					<ul class="clearfix typeul">
-						<li><a
-							href="http://www.myneko.tk/404-Error-Template/404nofound.html">学校通知</a>
-						</li>
-						<li><a
-							href="http://www.myneko.tk/404-Error-Template/404nofound.html">学院通知</a>
-						</li>
-						<li class="lli"><a
-							href="http://www.myneko.tk/404-Error-Template/404nofound.html">学习资料</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-
-			<div id="menu4" class="menusel">
-				<h2>
-					<a href="http://www.myneko.tk/404-Error-Template/404nofound.html">在线考试</a>
-				</h2>
-				<div class="position">
-					<ul class="clearfix typeul">
-						<li class="lli"><a
-							href="http://www.myneko.tk/404-Error-Template/404nofound.html">考试类型</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<div id="menu5" class="menusel">
-				<h2>
-					<a href="http://www.myneko.tk/404-Error-Template/404nofound.html">在线留言</a>
-				</h2>
-				<div class="position">
-					<ul class="clearfix typeul">
-						<li><a
-							href="http://www.myneko.tk/404-Error-Template/404nofound.html">发表留言</a>
-						</li>
-
-					</ul>
-				</div>
-			</div>
-			<div id="menu6" class="menusel">
-				<h2>
-					<a href="http://www.myneko.tk/404-Error-Template/404nofound.html">讨论</a>
-				</h2>
-				<div class="position">
-					<ul class="clearfix typeul">
-					</ul>
-				</div>
-			</div>
-		</div>
-
+        </ul>
+      </div>
+    </div>
+    <div id="menu6" class="menusel">
+      <h2><a href="http://www.865171.cn">讨论</a></h2>
+      <div class="position">
+        <ul class="clearfix typeul">
+        </ul>
+      </div>
+    </div> -->
+  </div>
 		<div class="main">
 
 			<div class="clear"></div>
@@ -206,7 +175,7 @@
 			</div>
 			<div class="huoban">
 				<div class="huoban_title">
-					<img src="../images/title_2.gif" />
+					<br />
 				</div>
 				<div class="huoban_nr">
 					<ul>

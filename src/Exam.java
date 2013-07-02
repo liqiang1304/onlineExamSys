@@ -49,158 +49,186 @@ public class Exam extends HttpServlet {
 				filePathString), "UTF-8");
 		BufferedReader reader = new BufferedReader(read);
 		String lineString;
-		String templateContentString="";
+		String templateContentString = "";
 		while ((lineString = reader.readLine()) != null) {
 			templateContentString += "\n";
 			templateContentString += lineString;
 		}
-		
-		
-		String jsCodeString="";
+
+		String jsCodeString = "";
 		String testId = request.getParameter("id");
-		//out.println("test id is: " + testId);
-		
-		
-		
-		try{
-		String driverName = "com.mysql.jdbc.Driver";
-		String userName = "root";
-		String userPasswd = "";
-		String dbName = "student";
-		String tableName = "news";
-		String url = "jdbc:mysql://localhost:3306/" + dbName + "?user="
-				+ userName + "&password=" + userPasswd
-				+ "&useUnicode=true&characterEncoding=utf8";
-		Class.forName("com.mysql.jdbc.Driver").newInstance();
-		Connection conn = DriverManager.getConnection(url);
-		Statement stmt = conn.createStatement();
-		Statement stmt1 = conn.createStatement();
-		
-		if(request.getSession().getAttribute("id")==null){
-			out.println("<meta http-equiv=\"Refresh\" content=\"0; url=../LoginDirect.jsp\" />");
-		}else{
-				String sql = "select * from student_recoder where student_id='"+request.getSession().getAttribute("id")+"' and test_id='"+testId+"'";
+		// out.println("test id is: " + testId);
+
+		try {
+			String driverName = "com.mysql.jdbc.Driver";
+			String userName = "root";
+			String userPasswd = "";
+			String dbName = "student";
+			String tableName = "news";
+			String url = "jdbc:mysql://localhost:3306/" + dbName + "?user="
+					+ userName + "&password=" + userPasswd
+					+ "&useUnicode=true&characterEncoding=utf8";
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Connection conn = DriverManager.getConnection(url);
+			Statement stmt = conn.createStatement();
+			Statement stmt1 = conn.createStatement();
+
+			if (request.getSession().getAttribute("id") == null) {
+				out.println("<meta http-equiv=\"Refresh\" content=\"0; url=../LoginDirect.jsp\" />");
+			} else {
+				String sql = "select * from student_recoder where student_id='"
+						+ request.getSession().getAttribute("id")
+						+ "' and test_id='" + testId + "'";
 				System.out.println(sql);
 				ResultSet rs = stmt.executeQuery(sql);
-				if(rs.next()){
+				if (rs.next()) {
 					out.println("<meta http-equiv=\"Refresh\" content=\"0; url=../AlreadyTest.jsp\" />");
-				}else{
-					sql = "select * from test_title where id='"+testId+"'";
+				} else {
+					sql = "select * from test_title where id='" + testId + "'";
 					rs = stmt1.executeQuery(sql);
-					if(rs.next()){
-						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+					if (rs.next()) {
+						SimpleDateFormat sdf = new SimpleDateFormat(
+								"yyyy-MM-dd HH:mm");
 						String ly_time = sdf.format(new java.util.Date());
-						if((rs.getString("start_time").compareTo(ly_time)<=0)&&(rs.getString("end_time").compareTo(ly_time)>=0)&&(rs.getString("avaliable").equals("yes"))){
+						if ((rs.getString("start_time").compareTo(ly_time) <= 0)
+								&& (rs.getString("end_time").compareTo(ly_time) >= 0)
+								&& (rs.getString("avaliable").equals("yes"))) {
 							out.print("");
-							jsCodeString="<script>\n" +
-									"var myDate = new Date();\n" +
-									"var d = Date.UTC(myDate.getFullYear(), myDate.getMonth()+1, myDate.getDate(), myDate.getHours(), myDate.getMinutes()+" + rs.getString("length") + ", myDate.getSeconds());"+
-									//"var d = myDate.getTime()+ " + 1000*60*Integer.valueOf(rs.getString("length")) + ";\n" +
-									"var obj = {\n sec: document.getElementById(\"sec\"),\n mini: document.getElementById(\"mini\"),\n hour: document.getElementById(\"hour\")\n }\n" +
-									"fnTimeCountDown(d, obj);\n" +
-									"setTimeout(sendTest,"+ 1000*60*Integer.valueOf(rs.getString("length")) +");\n" +
-									"function sendTest(){\n" +
-									"	alert(\"考试结束，将会提交试卷！\");\n" +
-									"	document.getElementById(\"testfrm\").submit();\n" +
-									"}\n" +
-									"</script>\n";
-						}else{
+							jsCodeString = "<script>\n"
+									+ "var myDate = new Date();\n"
+									+ "var d = Date.UTC(myDate.getFullYear(), myDate.getMonth()+1, myDate.getDate(), myDate.getHours(), myDate.getMinutes()+"
+									+ rs.getString("length")
+									+ ", myDate.getSeconds());"
+									+
+									// "var d = myDate.getTime()+ " +
+									// 1000*60*Integer.valueOf(rs.getString("length"))
+									// + ";\n" +
+									"var obj = {\n sec: document.getElementById(\"sec\"),\n mini: document.getElementById(\"mini\"),\n hour: document.getElementById(\"hour\")\n }\n"
+									+ "fnTimeCountDown(d, obj);\n"
+									+ "setTimeout(sendTest,"
+									+ 1000
+									* 60
+									* Integer.valueOf(rs.getString("length"))
+									+ ");\n"
+									+ "function sendTest(){\n"
+									+ "	alert(\"考试结束，将会提交试卷！\");\n"
+									+ "	document.getElementById(\"testfrm\").submit();\n"
+									+ "}\n" + "</script>\n";
+						} else {
 							out.println("<meta http-equiv=\"Refresh\" content=\"0; url=../OutofTime.jsp\" />");
 						}
 					}
-					
-				}
-		}
-		
-		templateContentString = templateContentString.replaceAll(
-				"###title###", "测试进行中");
-		//templateContentString = templateContentString.replaceAll(
-		//		"###jscode###", jsCodeString);
-		out.println(templateContentString);
-		
-		
-		
-		
-		String sql = "select * from test_title where id='"+testId+"'";
-		ResultSet rs = stmt.executeQuery(sql);
-		
-		if (rs.next()){
-			out.println("<h1 align=\"center\">"+rs.getString("test_name")+"</h1>");
-			out.println("<p align=\"center\">考试分类："+rs.getString("test_type")+ " &nbsp;&nbsp;考试时长："+rs.getString("length")+" 分钟</p>");
-			out.println("<p align=\"center\">开始时间："+rs.getString("start_time")+ " &nbsp;&nbsp;结束时间：" + rs.getString("end_time")+"</p>");
-		
-		
-		
 
-		
-		
-		String selectQuesSql = "select * from question where test_id='"+testId+"' order by id";
-		ResultSet ResQues = stmt.executeQuery(selectQuesSql);
-		
-		int num=0;
-		out.println("<form id=\"testfrm\" name=\"testfrm\" action=\"getSocre\" method=\"post\">");
-		out.println("<table border=\"0\">");
-		
-		while(ResQues.next()){
-			num++;
-			out.println("<tr><td>("+num+"). "+ResQues.getString("topic")+"</td></tr>");
-			String testTypeString=ResQues.getString("type");
-			
-			String selectAnsSql = "select * from opts where test_id='"+testId+"' and question_id='"+ResQues.getString("id") +"'order by option_title";
-			ResultSet ResAns = stmt1.executeQuery(selectAnsSql);
-
-			if(!testTypeString.equals("blank")){
-				while(ResAns.next()){
-					if(!ResAns.getString("option_content").equals("")){
-						if(testTypeString.equals("multi"))
-							out.print("<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name=\""+ResQues.getString("id")+"\" id=\""+ResQues.getString("id")+ "\" value=\""+ResAns.getString("option_title")+"\"type=\"checkbox\" />");
-						else
-							out.print("<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name=\""+ResQues.getString("id")+"\" id=\""+ResQues.getString("id")+ "\" value=\""+ResAns.getString("option_title")+ "\"type=\"radio\" />");
-						out.println(ResAns.getString("option_title")+". "+ResAns.getString("option_content")+"</tr>");
-					}				
 				}
-			}else{
-				out.println("<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name=\""+ResQues.getString("id")+"\" id=\""+ResQues.getString("id")+ "\" type=\"text\" length=\"15\" /></td></tr>");
 			}
-			out.println("<br/>");
-		}
-		out.println("</table>");
-		out.println("<input type=\"hidden\" name=\"testId\" id=\"testId\" value=\""+testId+"\"/>");
-		out.println("<input type=\"submit\" value=\"提交答卷\"/>");
-		out.println("</form>");
-		
-		}else{
-			out.print("<meta http-equiv=\"Refresh\" content=\"5; url=javascript:history.back(-1)\" />");
-			out.print("<p>注意，此测试不存在！请确认考试id。</p><br/>");
-			out.print("<p style=\"color:red;\">将带您返回上一页</p><br/>");
-			out.print("<p>如您的浏览器不支持跳转，请<a  style=\"color:red;\" href=\"javascript:history.back(-1)\">点击这里</a></p>");
-			
-		}
-		
-		
-		
-		}catch (Exception e) {
+
+			templateContentString = templateContentString.replaceAll(
+					"###title###", "测试进行中");
+			// templateContentString = templateContentString.replaceAll(
+			// "###jscode###", jsCodeString);
+			out.println(templateContentString);
+
+			String sql = "select * from test_title where id='" + testId + "'";
+			ResultSet rs = stmt.executeQuery(sql);
+
+			if (rs.next()) {
+				out.println("<h1 align=\"center\">" + rs.getString("test_name")
+						+ "</h1>");
+				out.println("<p align=\"center\">考试分类："
+						+ rs.getString("test_type") + " &nbsp;&nbsp;考试时长："
+						+ rs.getString("length") + " 分钟</p>");
+				out.println("<p align=\"center\">开始时间："
+						+ rs.getString("start_time") + " &nbsp;&nbsp;结束时间："
+						+ rs.getString("end_time") + "</p>");
+
+				String selectQuesSql = "select * from question where test_id='"
+						+ testId + "' order by id";
+				ResultSet ResQues = stmt.executeQuery(selectQuesSql);
+
+				int num = 0;
+				out.println("<form id=\"testfrm\" name=\"testfrm\" action=\"getSocre\" method=\"post\">");
+				out.println("<table border=\"0\">");
+
+				while (ResQues.next()) {
+					num++;
+					out.println("<tr><td>(" + num + "). "
+							+ ResQues.getString("topic") + "</td></tr>");
+					String testTypeString = ResQues.getString("type");
+
+					String selectAnsSql = "select * from opts where test_id='"
+							+ testId + "' and question_id='"
+							+ ResQues.getString("id")
+							+ "'order by option_title";
+					ResultSet ResAns = stmt1.executeQuery(selectAnsSql);
+
+					if (!testTypeString.equals("blank")) {
+						while (ResAns.next()) {
+							if (!ResAns.getString("option_content").equals("")) {
+								if (testTypeString.equals("multi"))
+									out.print("<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name=\""
+											+ ResQues.getString("id")
+											+ "\" id=\""
+											+ ResQues.getString("id")
+											+ "\" value=\""
+											+ ResAns.getString("option_title")
+											+ "\"type=\"checkbox\" />");
+								else
+									out.print("<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name=\""
+											+ ResQues.getString("id")
+											+ "\" id=\""
+											+ ResQues.getString("id")
+											+ "\" value=\""
+											+ ResAns.getString("option_title")
+											+ "\"type=\"radio\" />");
+								out.println(ResAns.getString("option_title")
+										+ ". "
+										+ ResAns.getString("option_content")
+										+ "</tr>");
+							}
+						}
+					} else {
+						out.println("<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name=\""
+								+ ResQues.getString("id")
+								+ "\" id=\""
+								+ ResQues.getString("id")
+								+ "\" type=\"text\" length=\"15\" /></td></tr>");
+					}
+					out.println("<br/>");
+				}
+				out.println("</table>");
+				out.println("<input type=\"hidden\" name=\"testId\" id=\"testId\" value=\""
+						+ testId + "\"/>");
+				out.println("<input type=\"submit\" value=\"提交答卷\"/>");
+				out.println("</form>");
+
+			} else {
+				out.print("<meta http-equiv=\"Refresh\" content=\"5; url=javascript:history.back(-1)\" />");
+				out.print("<p>注意，此测试不存在！请确认考试id。</p><br/>");
+				out.print("<p style=\"color:red;\">将带您返回上一页</p><br/>");
+				out.print("<p>如您的浏览器不支持跳转，请<a  style=\"color:red;\" href=\"javascript:history.back(-1)\">点击这里</a></p>");
+
+			}
+
+		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e);
 		}
-		
-		
+
 		filePathString = "";
-		filePathString = getServletContext().getRealPath(
-				"info/templateEnd.jsp");
-		read = new InputStreamReader(new FileInputStream(
-				filePathString), "UTF-8");
+		filePathString = getServletContext()
+				.getRealPath("info/templateEnd.jsp");
+		read = new InputStreamReader(new FileInputStream(filePathString),
+				"UTF-8");
 		reader = new BufferedReader(read);
-		templateContentString="";
+		templateContentString = "";
 		while ((lineString = reader.readLine()) != null) {
 			templateContentString += "\n";
 			templateContentString += lineString;
 		}
 		templateContentString = templateContentString.replaceAll(
-						"###jscode###", jsCodeString);
+				"###jscode###", jsCodeString);
 		out.println(templateContentString);
-		
-		
+
 		out.flush();
 		out.close();
 	}

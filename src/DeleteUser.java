@@ -9,42 +9,44 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 public class DeleteUser extends HttpServlet {
 
 	/**
 	 * The doGet method of the servlet. <br>
-	 *
+	 * 
 	 * This method is called when a form has its tag value method equals to get.
 	 * 
-	 * @param request the request send by the client to the server
-	 * @param response the response send by the server to the client
-	 * @throws ServletException if an error occurred
-	 * @throws IOException if an error occurred
+	 * @param request
+	 *            the request send by the client to the server
+	 * @param response
+	 *            the response send by the server to the client
+	 * @throws ServletException
+	 *             if an error occurred
+	 * @throws IOException
+	 *             if an error occurred
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		String id=request.getParameter("account");
-		try{
-		String driverName = "com.mysql.jdbc.Driver";
-		String userName = "root";
-		String userPasswd = "";
-		String dbName = "student";
-		String tableName = "personinfo";
-		String url = "jdbc:mysql://localhost:3306/" + dbName + "?user="
-				+ userName + "&password=" + userPasswd + "&useUnicode=true&characterEncoding=utf8";
-		Class.forName("com.mysql.jdbc.Driver").newInstance();
-		Connection conn = DriverManager.getConnection(url);
-		Statement stmt = conn.createStatement();
-		String sql = "delete from personinfo where id='"+id+"'";
-		stmt.executeUpdate(sql);
-		
-		
-		
-		}catch (Exception e) {
+		String id = request.getParameter("account");
+		try {
+			String driverName = "com.mysql.jdbc.Driver";
+			String userName = "root";
+			String userPasswd = "";
+			String dbName = "student";
+			String tableName = "personinfo";
+			String url = "jdbc:mysql://localhost:3306/" + dbName + "?user="
+					+ userName + "&password=" + userPasswd
+					+ "&useUnicode=true&characterEncoding=utf8";
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Connection conn = DriverManager.getConnection(url);
+			Statement stmt = conn.createStatement();
+			String sql = "delete from personinfo where id='" + id + "'";
+			stmt.executeUpdate(sql);
+
+		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.print(e);
 		}
@@ -55,13 +57,18 @@ public class DeleteUser extends HttpServlet {
 
 	/**
 	 * The doPost method of the servlet. <br>
-	 *
-	 * This method is called when a form has its tag value method equals to post.
 	 * 
-	 * @param request the request send by the client to the server
-	 * @param response the response send by the server to the client
-	 * @throws ServletException if an error occurred
-	 * @throws IOException if an error occurred
+	 * This method is called when a form has its tag value method equals to
+	 * post.
+	 * 
+	 * @param request
+	 *            the request send by the client to the server
+	 * @param response
+	 *            the response send by the server to the client
+	 * @throws ServletException
+	 *             if an error occurred
+	 * @throws IOException
+	 *             if an error occurred
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

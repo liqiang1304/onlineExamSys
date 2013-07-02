@@ -32,59 +32,59 @@
       <h2><a href="../index.jsp">首页</a></h2>
     </div>
     <div id="menu1" class="menusel">
-      <h2><a href="xiangqing.html">关于该系统</a></h2>
+      <h2><a href="../about/about.jsp">关于该系统</a></h2>
       <div class="position">
         <ul class="clearfix typeul">
-          <li><a href="http://www.myneko.tk/404-Error-Template/404nofound.html">系统简介</a></li>
-          <li class="lli"><a href="http://www.myneko.tk/404-Error-Template/404nofound.html">联系方式</a></li>
+          <li><a href="../about/about.jsp">系统简介</a></li>
+          <li class="lli"><a href="../about/contact.jsp">联系方式</a></li>
         </ul>
       </div>
     </div>
     
 	<div id="menu2" class="menusel">
-      <h2><a href="personInfo.jsp">个人信息</a></h2>
+      <h2><a href="../info/personInfo.jsp">个人信息</a></h2>
         <div class="position">
         <ul class="clearfix typeul">
-        <li class="lli"><a href="personInfo.jsp">查看个人信息</a></li>
+        <li class="lli"><a href="../info/personInfo.jsp">查看个人信息</a></li>
         </ul>
       </div>
     </div>
     
     <div id="menu3" class="menusel">
-      <h2><a href="xinwen.html">通知信息</a></h2>
+      <h2><a href="../news/campusNews.jsp">通知信息</a></h2>
       <div class="position">
         <ul class="clearfix typeul">
-          <li><a href="campusNews.jsp">学校通知</a></li>
-          <li><a href="schoolNews.jsp">学院通知</a></li>
-          <li class="lli"><a href="studyFils.jsp">学习资料</a></li>
+          <li><a href="../news/campusNews.jsp">学校新闻</a></li>
+          <li><a href="../news/schoolNews.jsp">学院新闻</a></li>
+          <li class="lli"><a href="../news/studyFiles.jsp">学习资料</a></li>
         </ul>
       </div>
     </div>
     
     <div id="menu4" class="menusel">
-      <h2><a href="http://www.myneko.tk/404-Error-Template/404nofound.html">在线考试</a></h2>
+      <h2><a href="../test/allTest.jsp">在线考试</a></h2>
       <div class="position">
         <ul class="clearfix typeul">
-        <li class="lli"><a href="http://www.myneko.tk/404-Error-Template/404nofound.html">考试类型</a></li>
+        <li class="lli"><a href="../test/allTest.jsp">考试类型</a></li>
         </ul>
       </div>
     </div>
-    <div id="menu5" class="menusel">
-      <h2><a href="http://www.myneko.tk/404-Error-Template/404nofound.html">在线留言</a></h2>
+<!--     <div id="menu5" class="menusel">
+      <h2><a href="http://www.865171.cn">在线留言</a></h2>
       <div class="position">
         <ul class="clearfix typeul">
-          <li><a href="http://www.myneko.tk/404-Error-Template/404nofound.html">发表留言</a></li>
+          <li><a href="http://www.865171.cn">发表留言</a></li>
 
         </ul>
       </div>
     </div>
     <div id="menu6" class="menusel">
-      <h2><a href="http://www.myneko.tk/404-Error-Template/404nofound.html">讨论</a></h2>
+      <h2><a href="http://www.865171.cn">讨论</a></h2>
       <div class="position">
         <ul class="clearfix typeul">
         </ul>
       </div>
-    </div>
+    </div> -->
   </div>
  
   <div class="main">
@@ -93,20 +93,27 @@
         <div class="left_title">通知信息</div>
         <div class="left_news">
           <ul>
-            <li><a href="../campusNews.jsp">学校信息</a></li>
-            <li><a href="../schoolNews.jsp">学院信息</a></li>
-            <li><a href="../studyFiles.jsp">学习资料</a></li>
+            <li><a href="campusNews.jsp">学校信息</a></li>
+            <li><a href="schoolNews.jsp">学院信息</a></li>
+            <li><a href="studyFiles.jsp">学习资料</a></li>
           </ul>
         </div>
       </div>
       <div class="box_1">
-        <div class="left_title">进行的考试</div>
+        <div class="left_title">个人信息</div>
         <div class="left_nr">
           <ul>
-            <li><a href="http://www.myneko.tk/404-Error-Template/404nofound.html">滚动滚动滚动滚动</a></li>
-            <li><a href="http://www.myneko.tk/404-Error-Template/404nofound.html">穿透内网文件传输</a></li>
-            <li><a href="http://www.myneko.tk/404-Error-Template/404nofound.html">网络版本的个人资料库</a></li>
-            <li><a href="http://www.myneko.tk/404-Error-Template/404nofound.html">强大的手机短信双向功能</a></li>
+          	<%
+          	if(request.getSession().getAttribute("name")!=null){
+          	 %>
+            <li><p style="color:red;">欢迎你：<%out.print(request.getSession().getAttribute("name"));//添加个人信息得到的函数；%></p></li>
+       		<li><a href="../info/personInfo.jsp">查看个人信息</a><br/></li>
+       		<li><a href="../ExitDirect.jsp">登出</a></li>
+       		<%}
+       		else{
+       		 %>
+       		 <li><a href="../index.jsp">请登录</a></li>
+       		 <%} %>
           </ul>
         </div>
       </div>
@@ -114,7 +121,7 @@
         <div class="left_title">考试类型</div>
         <div class="left_nr">
           <ul>
-            <li><a href="http://www.myneko.tk/404-Error-Template/404nofound.html">WEB信息发布系列</a></li>
+            <li><a href="../test/allTest.jsp">所有考试</a></li>
           </ul>
         </div>
       </div>
@@ -130,7 +137,7 @@
     </div>
     <div class="clear"></div>
     <div class="huoban">
-      <div class="huoban_title"><img src="../images/title_2.gif" /></div>
+      <div class="huoban_title"><br /></div>
       <div class="huoban_nr">
         <ul>
           <li><img src="../images/huoban_logo.gif" /></li>
