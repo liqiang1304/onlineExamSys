@@ -57,8 +57,6 @@ request.setCharacterEncoding("utf-8");
 			</div>
 			<div class="top_right">
 				<div class="top_right_1">
-					<a href="http://www.myneko.tk/404-Error-Template/404nofound.html">设为首页</a>
-					| <a href="http://www.myneko.tk/404-Error-Template/404nofound.html">加入收藏</a>
 				</div>
 				<div class="top_right_2"></div>
 			</div>

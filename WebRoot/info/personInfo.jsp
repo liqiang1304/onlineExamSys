@@ -53,8 +53,6 @@ request.setCharacterEncoding("utf-8");
 			</div>
 			<div class="top_right">
 				<div class="top_right_1">
-					<a href="http://www.myneko.tk/404-Error-Template/404nofound.html">设为首页</a>
-					| <a href="http://www.myneko.tk/404-Error-Template/404nofound.html">加入收藏</a>
 				</div>
 				<div class="top_right_2"></div>
 			</div>
@@ -213,7 +211,7 @@ request.setCharacterEncoding("utf-8");
 					  <br/>
 					 <%
 					 }
-					 	if(session.getAttribute("userType")!=null&&(session.getAttribute("userType").equals("teacher")||session.getAttribute("userType").equals("admin"))){
+					 	if((session.getAttribute("userType")!=null)&&(session.getAttribute("userType").equals("teacher")||session.getAttribute("userType").equals("admin"))){
 					  %>
 					  <a href="submitNews.jsp" style="color:blue;">发表文章</a>
 					  <a href="TestManage.jsp" style="color:blue;">考试管理</a>
@@ -237,7 +235,7 @@ request.setCharacterEncoding("utf-8");
 			</div>
 			<div class="huoban">
 				<div class="huoban_title">
-					<img src="../images/title_2.gif" />
+					<br />
 				</div>
 				<div class="huoban_nr">
 					<ul>
