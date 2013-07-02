@@ -86,7 +86,7 @@
       </div>
     </div>
   </div>
-  <div class="meun_2"><a href="http://www.myneko.tk/404-Error-Template/404nofound.html">用户登陆</a>　<a href="http://www.myneko.tk/404-Error-Template/404nofound.html">我要注册</a>　<a href="http://www.myneko.tk/404-Error-Template/404nofound.html">忘记密码？</a>[若已登陆，则换为：欢迎您：<%=session.getAttribute("name")%> 您上次登陆的时间为 2009-04-10 07：50] </div>
+ 
   <div class="main">
     <div class="left">
       <div class="box_1">

@@ -25,13 +25,9 @@ public class modifyTopic extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 
-
-		
-		
 		out.flush();
 		out.close();
 	}
@@ -53,7 +49,6 @@ public class modifyTopic extends HttpServlet {
 		
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-
 
 		String topic=request.getParameter("topic");
 		String testType=request.getParameter("testtype");

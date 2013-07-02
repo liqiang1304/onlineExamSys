@@ -13,7 +13,7 @@ request.setCharacterEncoding("utf-8");
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <%
-	if(session.getAttribute("userType")==null){
+	if(session.getAttribute("userType")==null||session.getAttribute("userType").equals("student")){
  %>
  	<meta http-equiv="Refresh" content="0; url=../LoginDirect.jsp" />
  <%} %>
@@ -30,22 +30,31 @@ request.setCharacterEncoding("utf-8");
 		Connection conn = DriverManager.getConnection(url);
 		Statement stmt = conn.createStatement();
 		Statement stmt1 = conn.createStatement();
-		String sql="select * from personinfo where id='" + session.getAttribute("id") + "'";
+		String sql="select * from personinfo where id='" + request.getParameter("userId") + "'";
 		ResultSet rs = stmt.executeQuery(sql);
-		if(null!=rs)
-			rs.next();
-			
+		if(null!=rs){
+			if(!rs.next()){
+				
+			}
+		}else{
+		
+		}
+		System.out.print(request.getParameter("userId"));
   %>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>CSS+DIV软件宣传模板 | 软件介绍 by 865171.cn</title>
 <link href="../css/css.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-	<script language="JavaScript" type="text/javascript">
+<script language="JavaScript" type="text/javascript">
 		function subReg() {
-			document.regFrm.submit();
+			if(IsMail()&&nameRight()){
+				document.regFrm.submit();
+			}else{
+				alert("请按格式完成注册！");
+			}
 		}
-	</script>
+</script>
 	<div class="zhong">
 		<div class="top">
 			<div class="top_left">
@@ -158,19 +167,16 @@ request.setCharacterEncoding("utf-8");
 			<div class="clear"></div>
 			<div class="login">
 				<div class="left_title">
-					<div align="center">个人信息</div>
+					<div align="center">学生个人信息管理--[<%=rs.getString("id") %>]</div>
 				</div>
 				<div align="center">
-					<form name="regFrm" action="reg.jsp" method="post">
-                    <%
-                    	if(session.getAttribute("userType")!=null){
-                     %>
-					  <p style="color:red;">欢迎您：<%=session.getAttribute("name")%></p>
-					  <p align="right"><input type="button" value="打印" onclick="javascript:window.print();" />(仅IE,Firefox)</p>
+					<form name="regFrm" action="../servlet/authoryInfo" method="post">
 					  <br/>
+					   <p align="right"><input type="button" value="打印" onclick="javascript:window.print();" />(仅IE,Firefox)</p>
 					  <hr color=#204080/>
 					  <p style="color:black;"><b>个人信息：</b></p>
 					  <br/>
+					  <input type="hidden" id="userid" name="userid" value="<%=rs.getString("id") %>"/>
 					  <table>
 					  <tr>
 					  <td>用户ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br /></td>
@@ -178,15 +184,17 @@ request.setCharacterEncoding("utf-8");
 					  </tr>
 					  <tr>
 					  <td>姓名</td>
-					  <td><%=rs.getString("name") %></td>
+					  <td><input id="name" name="name" value="<%=rs.getString("name") %>" onkeyup="nameRight()"/></td>
+					  <td><p id="nametest"></p></td>
 					  </tr>
 					  <tr>
 					  <td>权限</td>
-					  <td><%=rs.getString("authority") %></td>
+					  <td><%=rs.getString("authority") %>(在用户管理界面修改)</td>
 					  </tr>
 					  <tr>
 					  <td>E-mail</td>
-					  <td><%=rs.getString("email") %></td>
+					  <td><input id="email" name="email" value="<%=rs.getString("email") %>" onkeyup="IsMail()"/></td>
+					  <td><p id="emailtest"></p></td>
 					  </tr>
 					  <tr>
 					  <td>通过测试数量</td>
@@ -196,10 +204,18 @@ request.setCharacterEncoding("utf-8");
 					  <td>总分</td>
 					  <td><%=rs.getString("socre") %></td>
 					  </tr>
+					  <tr>
+					  <td>密码</td>
+					  <td>******&nbsp;&nbsp; <a style="color:red" href="../servlet/ResetPwd?userId=<%=rs.getString("id")%>">重置</a><br /></td>
+					  </tr>
 					  </table>
 					  <br/>
+					  <input type="button" id="modify" name="modify" value="确认修改" onclick="javascript:subReg()"/>
+					  </form>
+					  <br/>
+					  <br/>
 					  <hr color=#204080/>
-					  <p style="color:black;"><b>考试信息：</b>（快速预览 最近5项考试）</p>
+					  <p style="color:black;"><b>考试信息：</b></p>
 					  <br/>
 					  <table>
 					  	<tr>
@@ -207,16 +223,16 @@ request.setCharacterEncoding("utf-8");
 					  		<td align="center"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;考试名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
 					  		<td align="center"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
 					  		<td align="center"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;考试时间&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+					  		<td align="center"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;重考&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
 					  	</tr>
 					  	<%
-					  		sql = "select * from student_recoder where student_id='" + session.getAttribute("id") + "'";
+					  		sql = "select * from student_recoder where student_id='" + rs.getString("id") + "'";
 					  		rs = stmt.executeQuery(sql);
 					  		if(rs==null){
 					  			out.print("<tr>");
 					  		 	out.print("<td align=\"center\">您暂时没有考试记录</td>");
 					  		 	out.print("</td>");
 					  		 }
-					  		 int cnt=0;
 					  	 	while(rs.next()){
 					  		 	out.print("<tr>");
 					  		 	out.print("<td align=\"center\">"+rs.getString("test_id")+"</td>");
@@ -229,39 +245,13 @@ request.setCharacterEncoding("utf-8");
 					  		 	}
 					  		 	out.print("<td align=\"center\">"+rs.getString("total_correct")+"/"+rs.getString("total_question")+"</td>");
 					  		 	out.print("<td align=\"center\">"+rs.getString("test_time")+"</td>");
+					  		 	out.print("<td align=\"center\"><a style=\"color:red\" href=\"../servlet/Retests?userId="+rs.getString("student_id")+"&testId=" + rs.getString("test_id") +" \">重修</a></td>");
 					  		 	out.print("</tr>");
-					  		 	cnt++;
-					  		 	if(cnt==5) break;
 					  	 	}
-					  	 
-					  	 
 					  	 %>
 					  </table>
 					  <br/>
 					  <hr color=#204080/>
-					  <p style="color:black;"><b>管理平台：</b></p>
-					  <br/>
-					 <%
-					 }
-					 	if(session.getAttribute("userType")!=null&&(session.getAttribute("userType").equals("teacher")||session.getAttribute("userType").equals("admin"))){
-					  %>
-					  <a href="submitNews.jsp" style="color:blue;">发表文章</a>
-					  <a href="TestManage.jsp" style="color:blue;">考试管理</a>
-					  <a href="NewsManage.jsp" style="color:blue;">新闻管理</a>
-					  <%
-					  }
-					  if(session.getAttribute("userType")!=null&&session.getAttribute("userType").equals("admin")){
-					   %>
-					  <a href="UserManage.jsp" style="color:blue;">用户管理</a>
-					  
-					  <%
-					  }
-					   %>
-					  <a href="modifyInfo.jsp" style="color:blue;">资料修改</a>
-					  <a href="testInfo.jsp" style="color:blue;">考试信息</a>
-					  <br/>
-					<hr color=#204080/>
-					</form>
 				</div>
 			</div>
 			</div>
@@ -292,5 +282,34 @@ request.setCharacterEncoding("utf-8");
 		</div>
 	</div>
 	<script src="../js/meun.js" type="text/javascript"></script>
+			<script type="text/javascript">
+		function IsMail(){
+			var mail=document.getElementById("email").value;
+			var mailIsOk=document.getElementById("emailtest");
+			var patrn = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+			if (!patrn.test(mail)){
+				mailIsOk.style.color='red';
+				mailIsOk.innerHTML="Email格式不正确！";
+				return false; 
+			}
+			else{
+				mailIsOk.style.color='green'; 
+				mailIsOk.innerHTML="Email格式正确。";
+				return true;
+			} 
+		}
+function nameRight(){
+var name=document.getElementById("name").value;
+var testname=document.getElementById("nametest");
+if(! /^.{2,20}$/.test(name)){
+	testname.style.color='red';
+	testname.innerHTML="名字长度应在2-20个字符";
+}else{
+	testname.style.color='green';
+	testname.innerHTML="名字格式正确";
+	return true;
+	}
+}
+	</script>
 </body>
 </html>

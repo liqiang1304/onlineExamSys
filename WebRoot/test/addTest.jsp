@@ -171,7 +171,7 @@
                 <td  align="left"><input type="text" name="testLen" id="testLen"/>分钟</td>
                 </tr>     
                 <tr>
-                <td align="center" colspan="2"><input type="submit" value="提交"/></td>
+                <td align="center" colspan="2"><input type="submit" value="提交"/> &nbsp; &nbsp;&nbsp; <input type="button" value="返回" onclick="javascript:history.go(-1)"/></td>
                 </tr>
                 </table>
                 </form>

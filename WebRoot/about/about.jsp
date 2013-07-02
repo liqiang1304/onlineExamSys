@@ -3,7 +3,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="java.io.*"%>
 <%
-	request.setCharacterEncoding("utf-8");
+request.setCharacterEncoding("utf-8");
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
@@ -52,7 +52,7 @@
 			</div>
 			<div id="menu1" class="menusel">
 				<h2>
-					<a href="xiangqing.html">关于该系统</a>
+					<a href="../xiangqing.html">关于该系统</a>
 				</h2>
 				<div class="position">
 					<ul class="clearfix typeul">
@@ -139,29 +139,28 @@
 			<div class="clear"></div>
 			<div class="login">
 				<div class="left_title">
-					<div align="center">发表新闻</div>
+					<div align="center">关于该系统</div>
 				</div>
-				<div align="center">
-							<form name="example" method="post" action="../servlet/GenerateNewsHTML">
-							<h2 style="color:black;">标题</h2>
-			<input id="newstitle" name="newstitle" type="text" style="width:695px;"></input>
-			<br/><br/>
-			<h3>新闻内容</h3>
-			<textarea id="content1" name="content1" style="width:700px;height:300px;visibility:hidden;">
-				在此处插入新闻
-			</textarea>
-			<br />
-			请选择文章类型：
-			<select name="articleType">
-				<option value="学院信息">学院信息</option>
-				<option value="学校信息">学校信息</option>
-				<option value="学习资料">学习资料</option>
-			</select>您是：<%=session.getAttribute("name") %><br/>
-			<input type="submit" name="button" value="提交内容" /> (提交： Ctrl + Enter)
-			<input type="button" value="返回" onclick="javascript:history.go(-1)"/>
-			
-		</form>
+				<div>
+				  <p><font size="3" color="#000000"><strong>考试系统功能：</strong></font></p>
+				  <p>&nbsp;&nbsp;&nbsp; <strong>学生：</strong></p>
+				  <p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 1、考试</p>
+				  <p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 2、管理个人信息（包括修改信息，密码）</p>
+				  <p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 3、查看本人考试记录</p>
+				  <p>&nbsp;&nbsp;&nbsp; <strong>教师：</strong></p>
+				  <p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 1、同学生功能一样</p>
+				  <p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 2、发表删除添加者的新闻</p>
+				  <p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 3、管理添加者的题库</p>
+				  <p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 4、查看考试信息</p>
+				  <p>&nbsp;&nbsp;&nbsp; <strong>管理员：</strong></p>
+				  <p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 1、同教师功能一样</p>
+				  <p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 2、能够拥有所有权限管理用户</p>
+				  <p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 3、查看学生信息、修改、重考管理</p>
+				  <p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 4、管理所有试题、所有新闻</p>
+				  <p>&nbsp;</p>
+				  <p>&nbsp;&nbsp;&nbsp; 此外，该系统能够自动管理考试，了解考试人数，平均分，以便全面的了解考试情况。还具有打印功能，能够打印出所需要的信息，通知功能能够准确快速的转达信息，让学生更快速的了解到考试动向，新闻等。个人信息管理还能够更快的管理个人账号，密码修改重置功能能够方便的使忘记密码的用户登陆该系统等。</p><p><br /></p><p align="right"><br /></p><p align="right">考试系统开发小组敬上<br /></p>
 				</div>
+			</div>
 			</div>
 			<div class="huoban">
 				<div class="huoban_title">
@@ -190,23 +189,5 @@
 		</div>
 	</div>
 	<script src="../js/meun.js" type="text/javascript"></script>
-	<script charset="utf-8" src="../kindeditor/kindeditor.js"></script>
-		<script>
-			KE.show({
-				id : 'content1',
-				cssPath : './index.css',
-				afterCreate : function(id) {
-					KE.event.ctrl(document, 13, function() {
-						KE.sync(id);
-						document.forms['example'].submit();
-					});
-					KE.event.ctrl(KE.g[id].iframeDoc, 13, function() {
-						KE.sync(id);
-						document.forms['example'].submit();
-					});
-				}
-			});
-		</script>
-    
 </body>
 </html>

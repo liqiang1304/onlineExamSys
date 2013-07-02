@@ -3,7 +3,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="java.io.*"%>
 <%
-	request.setCharacterEncoding("utf-8");
+request.setCharacterEncoding("utf-8");
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
@@ -17,6 +17,25 @@
  %>
  	<meta http-equiv="Refresh" content="0; url=../LoginDirect.jsp" />
  <%} %>
+ <%
+ String driverName = "com.mysql.jdbc.Driver";
+		String userName = "root";
+		String userPasswd = "";
+		String dbName = "student";
+		String tableName = "news";
+		String url = "jdbc:mysql://localhost:3306/" + dbName + "?user="
+				+ userName + "&password=" + userPasswd
+				+ "&useUnicode=true&characterEncoding=utf8";
+		Class.forName("com.mysql.jdbc.Driver").newInstance();
+		Connection conn = DriverManager.getConnection(url);
+		Statement stmt = conn.createStatement();
+		Statement stmt1 = conn.createStatement();
+		String sql="select * from personinfo where id='" + session.getAttribute("id") + "'";
+		ResultSet rs = stmt.executeQuery(sql);
+		if(null!=rs)
+			rs.next();
+			
+  %>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>CSS+DIV软件宣传模板 | 软件介绍 by 865171.cn</title>
 <link href="../css/css.css" rel="stylesheet" type="text/css" />
@@ -52,7 +71,7 @@
 			</div>
 			<div id="menu1" class="menusel">
 				<h2>
-					<a href="xiangqing.html">关于该系统</a>
+					<a href="../xiangqing.html">关于该系统</a>
 				</h2>
 				<div class="position">
 					<ul class="clearfix typeul">
@@ -139,29 +158,59 @@
 			<div class="clear"></div>
 			<div class="login">
 				<div class="left_title">
-					<div align="center">发表新闻</div>
+					<div align="center">个人信息</div>
 				</div>
 				<div align="center">
-							<form name="example" method="post" action="../servlet/GenerateNewsHTML">
-							<h2 style="color:black;">标题</h2>
-			<input id="newstitle" name="newstitle" type="text" style="width:695px;"></input>
-			<br/><br/>
-			<h3>新闻内容</h3>
-			<textarea id="content1" name="content1" style="width:700px;height:300px;visibility:hidden;">
-				在此处插入新闻
-			</textarea>
-			<br />
-			请选择文章类型：
-			<select name="articleType">
-				<option value="学院信息">学院信息</option>
-				<option value="学校信息">学校信息</option>
-				<option value="学习资料">学习资料</option>
-			</select>您是：<%=session.getAttribute("name") %><br/>
-			<input type="submit" name="button" value="提交内容" /> (提交： Ctrl + Enter)
-			<input type="button" value="返回" onclick="javascript:history.go(-1)"/>
-			
-		</form>
+					<form name="regFrm" action="reg.jsp" method="post">
+                    <%
+                    	if(session.getAttribute("userType")!=null){
+                     %>
+					  <p style="color:red;">欢迎您：<%=session.getAttribute("name")%></p>
+					  <br/>
+					  <hr color=#204080/>
+					  
+					  <p style="color:black;"><b>考试信息：</b>（所有考试信息）</p>
+					  <br/>
+					  <table>
+					  	<tr>
+					  		<td align="center"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;考试号&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+					  		<td align="center"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;考试名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+					  		<td align="center"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+					  		<td align="center"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;考试时间&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+					  	</tr>
+					  	<%
+					  		sql = "select * from student_recoder where student_id='" + session.getAttribute("id") + "'";
+					  		rs = stmt.executeQuery(sql);
+					  		if(rs==null){
+					  			out.print("<tr>");
+					  		 	out.print("<td align=\"center\">您暂时没有考试记录</td>");
+					  		 	out.print("</td>");
+					  		 }
+					  	 	while(rs.next()){
+					  		 	out.print("<tr>");
+					  		 	out.print("<td align=\"center\">"+rs.getString("test_id")+"</td>");
+					  		 	String sql1="select * from test_title where Id='"+rs.getString("test_id")+"'";
+					  		 	ResultSet rs1 = stmt1.executeQuery(sql1);
+					  		 	if(rs1.next()){
+					  		 		out.print("<td align=\"center\">"+rs1.getString("test_name")+"</td>");
+					  		 	}else{
+					  		 		out.print("<td align=\"center\">null</td>");
+					  		 	}
+					  		 	out.print("<td align=\"center\">"+rs.getString("total_correct")+"/"+rs.getString("total_question")+"</td>");
+					  		 	out.print("<td align=\"center\">"+rs.getString("test_time")+"</td>");
+					  		 	out.print("</tr>");
+					  	 	}
+					  	 }
+					  	 
+					  	 %>
+					  </table>
+					  <br/>
+					  <hr color=#204080/>
+					  <br/>
+					  <input type="button" value="返回" onclick="javascript:history.go(-1)" />
+					</form>
 				</div>
+			</div>
 			</div>
 			<div class="huoban">
 				<div class="huoban_title">
@@ -190,23 +239,5 @@
 		</div>
 	</div>
 	<script src="../js/meun.js" type="text/javascript"></script>
-	<script charset="utf-8" src="../kindeditor/kindeditor.js"></script>
-		<script>
-			KE.show({
-				id : 'content1',
-				cssPath : './index.css',
-				afterCreate : function(id) {
-					KE.event.ctrl(document, 13, function() {
-						KE.sync(id);
-						document.forms['example'].submit();
-					});
-					KE.event.ctrl(KE.g[id].iframeDoc, 13, function() {
-						KE.sync(id);
-						document.forms['example'].submit();
-					});
-				}
-			});
-		</script>
-    
 </body>
 </html>

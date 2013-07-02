@@ -131,10 +131,10 @@ request.setCharacterEncoding("utf-8");
 			<div class="clear"></div>
 			<div class="login">
 				<div class="left_title">
-					<div align="center">注册成功</div>
+					<div align="center">登陆错误</div>
 				</div>
 				<div align="center">
-					<p>您还未登陆，请先登陆！</p>
+					<p>您还未登陆，或权限不足。请检查。</p>
                     <br/>
                    <p style="color:red;"> 5秒后将会返回主页登陆</p>
                    <Br/>

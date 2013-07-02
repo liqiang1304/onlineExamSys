@@ -216,7 +216,8 @@
 							</tbody>
 						</table>
 					</div>
-					<input name="newUser" type="button" id="newuser" value="添加用户" onclick="window.location='../Register_Page.jsp'"/>
+					<input name="newUser" type="button" id="newuser" value="添加用户" onclick="window.location='../Register_Page.jsp'"/> &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; 
+					<input type="button" value="返回" onclick="javascript:history.go(-1)"/>
 				</div>
 			</div>
 			<div class="huoban">

@@ -77,6 +77,41 @@
     <servlet-name>ModifyTest</servlet-name>
     <servlet-class>ModifyTest</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>modifyInfo</servlet-name>
+    <servlet-class>modifyInfo</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>modifyPwd</servlet-name>
+    <servlet-class>modifyPwd</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>authoryInfo</servlet-name>
+    <servlet-class>authoryInfo</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ResetPwd</servlet-name>
+    <servlet-class>ResetPwd</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Retests</servlet-name>
+    <servlet-class>Retests</servlet-class>
+  </servlet>
+
+
+
+
+
 
 
 
@@ -136,6 +171,26 @@
   <servlet-mapping>
     <servlet-name>ModifyTest</servlet-name>
     <url-pattern>/servlet/ModifyTest</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>modifyInfo</servlet-name>
+    <url-pattern>/servlet/modifyInfo</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>modifyPwd</servlet-name>
+    <url-pattern>/servlet/modifyPwd</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>authoryInfo</servlet-name>
+    <url-pattern>/servlet/authoryInfo</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ResetPwd</servlet-name>
+    <url-pattern>/servlet/ResetPwd</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Retests</servlet-name>
+    <url-pattern>/servlet/Retests</url-pattern>
   </servlet-mapping>	
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>

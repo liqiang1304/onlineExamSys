@@ -233,8 +233,8 @@
 							</tbody>
 						</table>
 					</div>
-					<input name="newUser" type="button" id="newuser" value="添加考试" onclick="window.location='../test/addTest.jsp'"/>
-					<br/><p>在添加和修改完试题之后，务必单击更新按钮来更新所生成的试题。</p>
+					<input name="newUser" type="button" id="newuser" value="添加考试" onclick="window.location='../test/addTest.jsp'"/> &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+					<input type="button" value="返回" onclick="javascript:history.go(-1)"/>
 				</div>
 			</div>
 			<div class="huoban">

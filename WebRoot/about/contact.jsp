@@ -3,7 +3,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="java.io.*"%>
 <%
-	request.setCharacterEncoding("utf-8");
+request.setCharacterEncoding("utf-8");
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
@@ -52,7 +52,7 @@
 			</div>
 			<div id="menu1" class="menusel">
 				<h2>
-					<a href="xiangqing.html">关于该系统</a>
+					<a href="../xiangqing.html">关于该系统</a>
 				</h2>
 				<div class="position">
 					<ul class="clearfix typeul">
@@ -139,29 +139,10 @@
 			<div class="clear"></div>
 			<div class="login">
 				<div class="left_title">
-					<div align="center">发表新闻</div>
+					<div align="center">联系方式</div>
 				</div>
-				<div align="center">
-							<form name="example" method="post" action="../servlet/GenerateNewsHTML">
-							<h2 style="color:black;">标题</h2>
-			<input id="newstitle" name="newstitle" type="text" style="width:695px;"></input>
-			<br/><br/>
-			<h3>新闻内容</h3>
-			<textarea id="content1" name="content1" style="width:700px;height:300px;visibility:hidden;">
-				在此处插入新闻
-			</textarea>
-			<br />
-			请选择文章类型：
-			<select name="articleType">
-				<option value="学院信息">学院信息</option>
-				<option value="学校信息">学校信息</option>
-				<option value="学习资料">学习资料</option>
-			</select>您是：<%=session.getAttribute("name") %><br/>
-			<input type="submit" name="button" value="提交内容" /> (提交： Ctrl + Enter)
-			<input type="button" value="返回" onclick="javascript:history.go(-1)"/>
-			
-		</form>
-				</div>
+				<div><font size="3"><strong>&nbsp;&nbsp;&nbsp; 考试系统开发小组联系方式：</strong></font><br />&nbsp;&nbsp;&nbsp; <br />&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; 组长：李锵<br />&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; 电话：18817598977<br />&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; Email：fx51lq@163.com<br />&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; QQ:414184509<br /><br />&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; 组员：宁永跚<br />&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; 组员：刘荣坚<br />&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; 组员：余尚儒<br /><br />&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; 地址：上海市嘉定区曹安公路4800号同济大学5号楼<br /></div>
+			</div>
 			</div>
 			<div class="huoban">
 				<div class="huoban_title">
@@ -190,23 +171,5 @@
 		</div>
 	</div>
 	<script src="../js/meun.js" type="text/javascript"></script>
-	<script charset="utf-8" src="../kindeditor/kindeditor.js"></script>
-		<script>
-			KE.show({
-				id : 'content1',
-				cssPath : './index.css',
-				afterCreate : function(id) {
-					KE.event.ctrl(document, 13, function() {
-						KE.sync(id);
-						document.forms['example'].submit();
-					});
-					KE.event.ctrl(KE.g[id].iframeDoc, 13, function() {
-						KE.sync(id);
-						document.forms['example'].submit();
-					});
-				}
-			});
-		</script>
-    
 </body>
 </html>

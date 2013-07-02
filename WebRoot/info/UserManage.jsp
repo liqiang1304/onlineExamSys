@@ -23,7 +23,7 @@
 <style>
 .scroll {
 	background: #FFF;
-	width: 500px; /*宽度*/
+	width: 550px; /*宽度*/
 	height: 600px; /*高度*/
 	color: ; /*颜色*/
 	font-family: ; /*字体*/
@@ -166,7 +166,7 @@
 				<div align="center">
 					<div class="scroll">
 						<table id="table" border="1px" cellspacing="0px"
-							style="border-collapse:collapse" width="450px">
+							style="border-collapse:collapse" width="500px">
 							<tbody>
 								<tr>
 									<td>用户ID</td>
@@ -175,6 +175,7 @@
 									<td>email</td>
 									<td>删除账户</td>
 									<td>更改权限</td>
+									<td>管理</td>
 								</tr>
 								<%
 									String driverName = "com.mysql.jdbc.Driver";
@@ -219,12 +220,14 @@
 										"<option value=\"teacher\""+ seTea+ ">老师</option>" + 
 										"<option value=\"admin\""+ seAdm+ ">管理员</option>" + 
 										"</select></td>");
+										out.print("<td><a style=\"color:red\" href=\"manageInfo.jsp?userId=" + rs.getString("id") + "\">管理</a></td>");
 									}
 								%>
 							</tbody>
 						</table>
 					</div>
-					<input name="newUser" type="button" id="newuser" value="添加用户" onclick="window.location='../Register_Page.jsp'"/>
+					<input name="newUser" type="button" id="newuser" value="添加用户" onclick="window.location='../Register_Page.jsp'"/> &nbsp; &nbsp; &nbsp; &nbsp;
+					<input type="button" value="返回" onclick="javascript:history.go(-1)"/>
 				</div>
 			</div>
 			<div class="huoban">

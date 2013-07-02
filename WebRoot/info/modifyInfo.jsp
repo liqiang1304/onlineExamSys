@@ -3,7 +3,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="java.io.*"%>
 <%
-	request.setCharacterEncoding("utf-8");
+request.setCharacterEncoding("utf-8");
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
@@ -17,16 +17,39 @@
  %>
  	<meta http-equiv="Refresh" content="0; url=../LoginDirect.jsp" />
  <%} %>
+ <%
+ String driverName = "com.mysql.jdbc.Driver";
+		String userName = "root";
+		String userPasswd = "";
+		String dbName = "student";
+		String tableName = "news";
+		String url = "jdbc:mysql://localhost:3306/" + dbName + "?user="
+				+ userName + "&password=" + userPasswd
+				+ "&useUnicode=true&characterEncoding=utf8";
+		Class.forName("com.mysql.jdbc.Driver").newInstance();
+		Connection conn = DriverManager.getConnection(url);
+		Statement stmt = conn.createStatement();
+		Statement stmt1 = conn.createStatement();
+		String sql="select * from personinfo where id='" + session.getAttribute("id") + "'";
+		ResultSet rs = stmt.executeQuery(sql);
+		if(null!=rs)
+			rs.next();
+			
+  %>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>CSS+DIV软件宣传模板 | 软件介绍 by 865171.cn</title>
 <link href="../css/css.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" type="text/javascript">
+		function subReg() {
+			if(IsMail()&&nameRight()){
+				document.regFrm.submit();
+			}else{
+				alert("请按格式完成注册！");
+			}
+		}
+</script>
 </head>
 <body>
-	<script language="JavaScript" type="text/javascript">
-		function subReg() {
-			document.regFrm.submit();
-		}
-	</script>
 	<div class="zhong">
 		<div class="top">
 			<div class="top_left">
@@ -52,7 +75,7 @@
 			</div>
 			<div id="menu1" class="menusel">
 				<h2>
-					<a href="xiangqing.html">关于该系统</a>
+					<a href="../xiangqing.html">关于该系统</a>
 				</h2>
 				<div class="position">
 					<ul class="clearfix typeul">
@@ -139,29 +162,78 @@
 			<div class="clear"></div>
 			<div class="login">
 				<div class="left_title">
-					<div align="center">发表新闻</div>
+					<div align="center">修改个人信息</div>
 				</div>
 				<div align="center">
-							<form name="example" method="post" action="../servlet/GenerateNewsHTML">
-							<h2 style="color:black;">标题</h2>
-			<input id="newstitle" name="newstitle" type="text" style="width:695px;"></input>
-			<br/><br/>
-			<h3>新闻内容</h3>
-			<textarea id="content1" name="content1" style="width:700px;height:300px;visibility:hidden;">
-				在此处插入新闻
-			</textarea>
-			<br />
-			请选择文章类型：
-			<select name="articleType">
-				<option value="学院信息">学院信息</option>
-				<option value="学校信息">学校信息</option>
-				<option value="学习资料">学习资料</option>
-			</select>您是：<%=session.getAttribute("name") %><br/>
-			<input type="submit" name="button" value="提交内容" /> (提交： Ctrl + Enter)
-			<input type="button" value="返回" onclick="javascript:history.go(-1)"/>
-			
-		</form>
+					<form name="regFrm" action="../servlet/modifyInfo" method="post">
+                    <%
+                    	if(session.getAttribute("userType")!=null){
+                     %>
+					  <p style="color:red;">欢迎您：<%=session.getAttribute("name")%></p>
+					  <br/>
+					  <hr color=#204080/>
+					 <table>
+					  <tr>
+					  <td>用户ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br /></td>
+					  <td><%=rs.getString("id") %></td>
+					  </tr>
+					  <tr>
+					  <td>姓名</td>
+					  <td><input type="text" id="name" name="name" onkeyup="nameRight()" value="<%=rs.getString("name") %>"/></td>
+					  <td>
+					  <p style="color:red;" id="nametest" name="nametest">
+							<%
+							if (((String) request.getAttribute("emailExam")) != null)
+									out.print(request.getAttribute("emailExam") + "<br/>");
+							 %>
+					  </p>
+					  </td>
+					  <td name="" id=""></td>
+					  </tr>
+					  <tr>
+					  <td>权限</td>
+					  <td><%=rs.getString("authority") %></td>
+					  </tr>
+					  <tr>
+					  <td>E-mail</td>
+					  <td><input type="text" id="email" name="email" onkeyup="IsMail()" value="<%=rs.getString("email") %>"/></td>
+					  <td>
+					  <p style="color:red;" id="emailtest" name="emailtest">
+							<%
+							 if (((String) request.getAttribute("nameExam")) != null)
+							    	out.print(request.getAttribute("nameExam") + "<br/>");
+							 %>
+					  </p>
+					  </td>
+					  </tr>
+					  <tr>
+					  <td>通过测试数量</td>
+					  <td><%=rs.getString("passTest") %></td>
+					  </tr>
+					  <tr>
+					  <td>总分</td>
+					  <td><%=rs.getString("socre") %></td>
+					  </tr>
+					  <tr>
+					  <td>确认密码：</td>
+					  <td><input type="password" id="pwdConfirm" name="pwdConfirm"/></td>
+					  <td><a href="../info/modifyPwd.jsp">点击这里修改密码</a><p style="color:red;">
+					  <%
+					    if (((String) request.getAttribute("pwdCon")) != null) out.print(request.getAttribute("pwdCon") + "<br/>");
+					  %>  
+					  </p></td>
+					  
+					  </tr>
+					  </table>
+					 <%} %>
+					 <br/>
+					<hr color=#204080/>
+					<br/>
+					<input type="button" value="确认修改" id="sub" name="sub" onclick="javascript:subReg()"/> &nbsp; &nbsp; &nbsp; &nbsp; 
+					<input type="button" value="返回" onclick="javascript:history.go(-1)" />
+					</form>
 				</div>
+			</div>
 			</div>
 			<div class="huoban">
 				<div class="huoban_title">
@@ -190,23 +262,34 @@
 		</div>
 	</div>
 	<script src="../js/meun.js" type="text/javascript"></script>
-	<script charset="utf-8" src="../kindeditor/kindeditor.js"></script>
-		<script>
-			KE.show({
-				id : 'content1',
-				cssPath : './index.css',
-				afterCreate : function(id) {
-					KE.event.ctrl(document, 13, function() {
-						KE.sync(id);
-						document.forms['example'].submit();
-					});
-					KE.event.ctrl(KE.g[id].iframeDoc, 13, function() {
-						KE.sync(id);
-						document.forms['example'].submit();
-					});
-				}
-			});
-		</script>
-    
+		<script type="text/javascript">
+		function IsMail(){
+			var mail=document.getElementById("email").value;
+			var mailIsOk=document.getElementById("emailtest");
+			var patrn = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+			if (!patrn.test(mail)){
+				mailIsOk.style.color='red';
+				mailIsOk.innerHTML="Email格式不正确！";
+				return false; 
+			}
+			else{
+				mailIsOk.style.color='green'; 
+				mailIsOk.innerHTML="Email格式正确。";
+				return true;
+			} 
+		}
+function nameRight(){
+var name=document.getElementById("name").value;
+var testname=document.getElementById("nametest");
+if(! /^.{2,20}$/.test(name)){
+	testname.style.color='red';
+	testname.innerHTML="名字长度应在2-20个字符";
+}else{
+	testname.style.color='green';
+	testname.innerHTML="名字格式正确";
+	return true;
+	}
+}
+	</script>
 </body>
 </html>

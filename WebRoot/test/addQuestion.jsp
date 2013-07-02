@@ -170,7 +170,8 @@
                
                 <input type="hidden" id="testName" name="testName" value="<%=newstr %>" />
                 <input type="hidden" id="testId" name="testId" value="<%=request.getParameter("testId") %>"/>
-                <input onclick="testInput()" type="button" value="提交"/>
+                <input onclick="testInput()" type="button" value="提交"/> &nbsp; &nbsp;   
+                <input type="button" value="返回" onclick="javascript:history.go(-1)"/>
                 </form>
                 </div>
 			</div>
